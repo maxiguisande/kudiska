@@ -18,7 +18,7 @@ export const getDomains = (req: Request, res: Response) => {
         //si termina bien lo informo
         res.json({
             ok: true,
-            data
+            exist: data.length > 0 ? true : false
         })
     })
 }

@@ -37,6 +37,15 @@ class MySQL {
         });
     }
     connectDB() {
+        this.conn.on('error', (err) => {
+            if (err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+                console.log("Conection LOST CONECTO DB!!!!");
+                this.connectDB(); // lost due to either server restart, or a
+            }
+            else { // connnection idle timeout (the wait_timeout
+                throw err; // server variable configures this)
+            }
+        });
         this.conn.connect((err) => {
             if (err) {
                 return err;

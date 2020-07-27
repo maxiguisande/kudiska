@@ -22,7 +22,7 @@ exports.getDomains = (req, res) => {
         //si termina bien lo informo
         res.json({
             ok: true,
-            data
+            exist: data.length > 0 ? true : false
         });
     });
 };
