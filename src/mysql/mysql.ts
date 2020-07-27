@@ -8,7 +8,6 @@ export default class MySQL {
 
     connected: boolean = false;
 
-
     constructor() {
         //Creo la conexion con la base de datos
         /*

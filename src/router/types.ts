@@ -4,7 +4,7 @@ import { getSelectorTypes, getApplicationTypes } from '../controller/selector.co
 
 const router = Router();
 
-router.get('/tipo_selectores', [validateToken], getSelectorTypes);
-router.get('/tipo_aplicaciones', [validateToken], getApplicationTypes);
+router.get('/tipo_selectores', getSelectorTypes);
+router.get('/tipo_aplicaciones', getApplicationTypes);
 
 export default router;
