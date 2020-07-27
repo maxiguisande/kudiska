@@ -16,13 +16,12 @@ class MySQL {
         });
         */
         this.connected = false;
-        this.conn = mysql_1.default.createConnection({
+        this.conn = mysql_1.default.createPool({
             host: 'bbdd.kudiska.com',
             user: 'ddb152277',
             password: 'kudiska@123',
             database: 'ddb152277',
         });
-        this.connectDB();
     }
     static get instance() {
         return this._instance || (this._instance = new this());
@@ -34,23 +33,6 @@ class MySQL {
             }
             ;
             callback(null, results);
-        });
-    }
-    connectDB() {
-        this.conn.on('error', (err) => {
-            if (err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
-                console.log("Conection LOST CONECTO DB!!!!");
-                this.connectDB(); // lost due to either server restart, or a
-            }
-            else { // connnection idle timeout (the wait_timeout
-                throw err; // server variable configures this)
-            }
-        });
-        this.conn.connect((err) => {
-            if (err) {
-                return err;
-            }
-            this.connected = true;
         });
     }
 }

@@ -4,7 +4,7 @@ export default class MySQL {
 
     private static _instance: MySQL;
 
-    conn: mysql.Connection;
+    conn: mysql.Pool;
 
     connected: boolean = false;
 
@@ -20,14 +20,13 @@ export default class MySQL {
         });
         */
 
-        this.conn = mysql.createConnection({
+        this.conn = mysql.createPool({
             host: 'bbdd.kudiska.com',
             user: 'ddb152277',
             password: 'kudiska@123',
             database: 'ddb152277',
         });
 
-        this.connectDB();
     }
 
     public static get instance() {
@@ -44,27 +43,5 @@ export default class MySQL {
             callback(null, results);
         });
     }
-
-    private connectDB() {
-        this.conn.on('error',  (err) => {
-            if (err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
-                console.log("Conection LOST CONECTO DB!!!!");
-                this.connectDB();                       // lost due to either server restart, or a
-            } else {                                      // connnection idle timeout (the wait_timeout
-                throw err;                                  // server variable configures this)
-            }
-        });
-
-        this.conn.connect((err: mysql.MysqlError) => {
-            if (err) {
-                return err;
-            }
-
-            this.connected = true;
-        })
-
-    }
-
-
 
 }
